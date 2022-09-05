@@ -14,7 +14,11 @@ Array.from(todoComplete).forEach((el)=>{
     el.addEventListener('click', markIncomplete)
 })
 
+
 async function deleteTodo(){
+  //added variable to see if item before is one
+    let numberOfDelete = Array.from(deleteBtn).length
+
     const todoId = this.parentNode.dataset.id
     try{
         const response = await fetch('todos/deleteTodo', {
@@ -24,9 +28,16 @@ async function deleteTodo(){
                 'todoIdFromJSFile': todoId
             })
         })
+        if (numberOfDelete == 1){
+          numberOfDelete = "start"
+        }
         const data = await response.json()
         console.log(data)
         location.reload()
+        //function to toggle confetti
+        if (numberOfDelete = "start"){
+          startConfetti()
+        }
     }catch(err){
         console.log(err)
     }

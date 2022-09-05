@@ -31,16 +31,16 @@ app.use(
       store: new MongoStore({ mongooseConnection: mongoose.connection }),
     })
   )
-  
+
 // Passport middleware
 app.use(passport.initialize())
 app.use(passport.session())
 
 app.use(flash())
-  
+
 app.use('/', mainRoutes)
 app.use('/todos', todoRoutes)
- 
-app.listen(process.env.PORT, ()=>{
+
+app.listen( process.env.PORT, ()=>{
     console.log('Server is running, you better catch it!')
-})    
+})

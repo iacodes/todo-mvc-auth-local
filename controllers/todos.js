@@ -1,6 +1,8 @@
 const Todo = require('../models/Todo')
 
 module.exports = {
+
+  //Get todo's based on logged in user
     getTodos: async (req,res)=>{
         console.log(req.user)
         try{
@@ -11,6 +13,8 @@ module.exports = {
             console.log(err)
         }
     },
+
+    //create todo for the user that is logged in
     createTodo: async (req, res)=>{
         try{
             await Todo.create({todo: req.body.todoItem, completed: false, userId: req.user.id})
@@ -33,6 +37,7 @@ module.exports = {
     },
     markIncomplete: async (req, res)=>{
         try{
+          //getting from to do
             await Todo.findOneAndUpdate({_id:req.body.todoIdFromJSFile},{
                 completed: false
             })
@@ -42,6 +47,7 @@ module.exports = {
             console.log(err)
         }
     },
+
     deleteTodo: async (req, res)=>{
         console.log(req.body.todoIdFromJSFile)
         try{
@@ -52,4 +58,4 @@ module.exports = {
             console.log(err)
         }
     }
-}    
+}
